@@ -1,29 +1,26 @@
+const {ApolloServer, gql} = require('apollo-server-express');
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const graphql = require('graphql');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-const QueryRoot = new graphql.GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-        hello: {
-            type: graphql.GraphQLString,
-            resolve: () => "Hello world!"
-        }
-    })
+const typeDefs = gql`
+    type Query {  
+        hello: String!
+    }
+`;
+
+const resolvers = {
+    Query: {
+        hello: () => 'hello'
+    }
+};
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
 });
 
-const schema = new graphql.GraphQLSchema({ query: QueryRoot });
-
-
-app.use(
-    '/graphql',
-    graphqlHTTP({
-        schema,
-        graphiql: true,
-    }),
-);
+server.applyMiddleware({ app });
 
 app.listen(port, () => console.log(`running on port: ${port}`));
