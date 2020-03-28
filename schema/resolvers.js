@@ -1,32 +1,25 @@
-import tasks from '../tasks';
+import { Task } from '../models/Task';
 
 export const resolvers = {
     Query: {
-        allTasks: () => tasks
+        allTasks: () => Task.find()
     },
     Mutation: {
-        createTask: (_, { name, done }) => {
-            const task = {
-                id: Math.round(Math.random() * 100),
-                name,
-                done
-            };
-            tasks.push(task);
+        createTask: async(_, { name, done }) => {
+            const task = new Task({ name, done });
+            await task.save();
             return task;
         },
-        deleteTask: (_, { id }) => {
-            const taskIndex = tasks.findIndex(task => task.id === id);
-            const task = tasks[taskIndex];
-            tasks.splice(taskIndex, 1);
+        deleteTask: async(_, { id }) => {
+            const task = await Task.findOne({ _id: id }, (err, result) => err ? console.log(err) : console.log(result));
+            task.deleteOne();
             return task;
         },
-        updateTask: (_, { id, done }) => {
-            const task = tasks.find(task => task.id === parseInt(id));
-            task.done = done;
+        updateTask: async(_, { id, done }) => {
+            await Task.updateOne({ _id: id }, { done: done }, (err, result) => err ? console.log(err) : console.log(result));
+            const task = await Task.findOne({ _id: id });
             return task;
         }
     }
 };
 
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'));
