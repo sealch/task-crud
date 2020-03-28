@@ -7,9 +7,6 @@ import { typeDefs } from './schema/typeDefs'
 const app = express();
 const port = process.env.PORT || 5000;
 
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'));
-
 
 const startServer = async () => {
 
