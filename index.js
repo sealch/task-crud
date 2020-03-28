@@ -16,7 +16,7 @@ const startServer = async () => {
         resolvers
     });
 
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app, path: '/'});
 
     await mongoose.connect(process.env.mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
     app.listen(port, () => console.log(`running on port: ${port}`));
