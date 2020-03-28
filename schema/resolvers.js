@@ -11,12 +11,12 @@ export const resolvers = {
             return task;
         },
         deleteTask: async(_, { id }) => {
-            const task = await Task.findOne({ _id: id }, (err, result) => err ? console.log(err) : console.log(result));
+            const task = await Task.findOne({ _id: id }, (err, result) => console.log(err || result));
             task.deleteOne();
             return task;
         },
         updateTask: async(_, { id, done }) => {
-            await Task.updateOne({ _id: id }, { done: done }, (err, result) => err ? console.log(err) : console.log(result));
+            await Task.updateOne({ _id: id }, { done: done }, (err, result) => console.log(err || result));
             const task = await Task.findOne({ _id: id });
             return task;
         }
