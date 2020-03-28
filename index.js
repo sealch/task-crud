@@ -1,9 +1,9 @@
-import { ApolloServer, gql } from 'apollo-server-express';
-import express from 'express';
-import mongoose from 'mongoose';
-import {} from 'dotenv/config'
-import { resolvers } from './schema/resolvers'
-import { typeDefs } from './schema/typeDefs'
+const { ApolloServer, gql } = require('apollo-server-express');
+const express  = require('express');
+const mongoose = require('mongoose');
+const {} = require('dotenv/config');
+const { resolvers } = require('./schema/resolvers');
+const { typeDefs } = require('./schema/typeDefs');
 
 const app = express();
 const port = process.env.PORT || 5000;

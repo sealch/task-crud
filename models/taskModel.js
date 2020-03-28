@@ -1,3 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-export const TaskModel = mongoose.model('TaskModel', { name: String, done: Boolean});
+const TaskModel = mongoose.model('TaskModel', { name: String, done: Boolean});
+
+module.exports = {
+    TaskModel
+};

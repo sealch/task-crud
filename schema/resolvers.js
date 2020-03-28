@@ -1,25 +1,28 @@
-import { TaskModel } from '../models/taskModel';
+const { TaskModel } = require('../models/taskModel');
 
-export const resolvers = {
+const resolvers = {
     Query: {
-        allTasks: async() => await TaskModel.find()
+        allTasks: async () => await TaskModel.find()
     },
     Mutation: {
-        createTask: async(_, { name, done }) => {
-            const task = new TaskModel({ name, done });
+        createTask: async (_, {name, done}) => {
+            const task = new TaskModel({name, done});
             await task.save();
             return task;
         },
-        deleteTask: async(_, { id }) => {
-            const task = await TaskModel.findOne({ _id: id });
+        deleteTask: async (_, {id}) => {
+            const task = await TaskModel.findOne({_id: id});
             task.deleteOne();
             return task;
         },
-        updateTask: async(_, { id, done }) => {
-            await TaskModel.updateOne({ _id: id }, { done: done });
-            const task = await TaskModel.findOne({ _id: id });
+        updateTask: async (_, {id, done}) => {
+            await TaskModel.updateOne({_id: id}, {done: done});
+            const task = await TaskModel.findOne({_id: id});
             return task;
         }
     }
 };
 
+module.exports = {
+    resolvers
+};
