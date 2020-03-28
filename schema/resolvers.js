@@ -1,23 +1,23 @@
-import { Task } from '../models/Task';
+import { TaskModel } from '../models/taskModel';
 
 export const resolvers = {
     Query: {
-        allTasks: () => Task.find()
+        allTasks: async() => await TaskModel.find()
     },
     Mutation: {
         createTask: async(_, { name, done }) => {
-            const task = new Task({ name, done });
+            const task = new TaskModel({ name, done });
             await task.save();
             return task;
         },
         deleteTask: async(_, { id }) => {
-            const task = await Task.findOne({ _id: id }, (err, result) => console.log(err || result));
+            const task = await TaskModel.findOne({ _id: id });
             task.deleteOne();
             return task;
         },
         updateTask: async(_, { id, done }) => {
-            await Task.updateOne({ _id: id }, { done: done }, (err, result) => console.log(err || result));
-            const task = await Task.findOne({ _id: id });
+            await TaskModel.updateOne({ _id: id }, { done: done });
+            const task = await TaskModel.findOne({ _id: id });
             return task;
         }
     }
