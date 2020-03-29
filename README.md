@@ -2,6 +2,23 @@
 
 #### This is simple graphQL CRUD API for todo list
 
+## Run using docker
+```bash
+git clone https://github.com/sealch/task-crud.git
+cd task-crud
+touch .env
+
+```
+Set `mongoUrl="mongodb://mongo:27017"` in .env
+
+```bash
+cd docker
+data='~/path/to/mongo/data' docker-compose up --build
+
+```
+Now server should be running at http://localhost:5000/
+
+
 ## Run locally
 ```bash
 git clone https://github.com/sealch/task-crud.git
