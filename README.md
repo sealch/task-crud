@@ -6,7 +6,7 @@
 ```bash
 git clone https://github.com/sealch/task-crud.git
 cd task-crud/docker
-data='~/docs/mongodata' mongoUrl='mongodb://mongo:27017' docker-compose up --build
+data='~/path/to/mongo/data' mongoUrl='mongodb://mongo:27017' docker-compose up --build
 
 ```
 Now server should be running at http://localhost:5000/
