@@ -1,0 +1,6 @@
+FROM node:12
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm i npm@latest -g && npm i --only=prod
+COPY . .
+CMD node index.js
